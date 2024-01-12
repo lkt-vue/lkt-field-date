@@ -47,8 +47,8 @@ const j = (e) => e !== "" ? new Date(`${e}T00:00:00Z`) : null, z = ["data-show-u
     locale: { type: String, default: "en-US" }
   },
   emits: ["update:modelValue", "click-info", "click-error"],
-  setup(e, { expose: B, emit: V }) {
-    const c = V, d = L(), t = e, u = (a) => a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2), s = b(16), r = n(null), y = n(u(t.modelValue)), l = n(u(t.modelValue)), D = n(!1), w = n(!t.readMode), S = i(() => typeof t.valid == "function" ? t.valid() : t.valid), P = i(() => l.value !== y.value), x = i(() => t.reset || t.infoMessage !== "" || t.errorMessage !== ""), g = i(() => {
+  setup(e, { expose: V, emit: B }) {
+    const c = B, d = L(), t = e, u = (a) => a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2), s = b(16), r = n(null), y = n(u(t.modelValue)), l = n(u(t.modelValue)), D = n(!1), w = n(!t.readMode), S = i(() => typeof t.valid == "function" ? t.valid() : t.valid), P = i(() => l.value !== y.value), x = i(() => t.reset || t.infoMessage !== "" || t.errorMessage !== ""), g = i(() => {
       let a = 0;
       return t.reset && ++a, t.infoMessage && ++a, a;
     }), N = i(() => {
@@ -65,7 +65,7 @@ const j = (e) => e !== "" ? new Date(`${e}T00:00:00Z`) : null, z = ["data-show-u
       typeof a == "string" ? c("update:modelValue", j(a)) : c("update:modelValue", a);
     });
     const p = () => l.value = y.value;
-    return B({
+    return V({
       Identifier: s,
       reset: p,
       focus: C,
@@ -120,7 +120,7 @@ const j = (e) => e !== "" ? new Date(`${e}T00:00:00Z`) : null, z = ["data-show-u
 });
 const W = {
   install: (e) => {
-    e.component("VueDatePicker", T).component("lkt-field-date", q);
+    e.component("lkt-field-date") === void 0 && e.component("lkt-field-date", q), e.component("VueDatePicker") === void 0 && e.component("VueDatePicker", T);
   }
 };
 export {

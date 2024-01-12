@@ -7,8 +7,9 @@ import './../lkt-field-date.css';
 
 const LktFieldDate = {
   install: (app: App) => {
-    app.component('VueDatePicker', VueDatePicker)
-        .component('lkt-field-date', dateField);
+    // Register plugin components
+    if (app.component('lkt-field-date') === undefined) app.component('lkt-field-date', dateField);
+    if (app.component('VueDatePicker') === undefined) app.component('VueDatePicker', VueDatePicker);
   },
 };
 
