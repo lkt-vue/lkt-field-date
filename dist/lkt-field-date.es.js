@@ -61,7 +61,7 @@ const j = (e) => e !== "" ? new Date(`${e}T00:00:00Z`) : null, z = ["data-show-u
     };
     m(() => t.readMode, (a) => w.value = !a), m(() => t.modelValue, (a) => {
       l.value = u(a);
-    }), m(l, (a) => {
+    }, { deep: !0 }), m(l, (a) => {
       typeof a == "string" ? c("update:modelValue", j(a)) : c("update:modelValue", a);
     });
     const p = () => l.value = y.value;

@@ -123,7 +123,7 @@ const focus = () => {
 watch(() => props.readMode, (v) => editable.value = !v)
 watch(() => props.modelValue, (v) => {
     value.value = getFormattedDate(v)
-})
+}, {deep: true})
 watch(value, (v) => {
     if (typeof v === 'string') {
         emits('update:modelValue', ymdToDate(v))
