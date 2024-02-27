@@ -1,7 +1,7 @@
-import T from "@vuepic/vue-datepicker";
-import { defineComponent as F, useSlots as L, ref as n, computed as i, watch as m, resolveComponent as A, openBlock as v, createElementBlock as h, normalizeClass as E, unref as o, renderSlot as $, createCommentVNode as M, createElementVNode as I, createVNode as U, nextTick as H } from "vue";
+import R from "@vuepic/vue-datepicker";
+import { defineComponent as L, useSlots as A, ref as n, computed as i, watch as m, resolveComponent as E, openBlock as v, createElementBlock as h, normalizeClass as F, unref as o, renderSlot as $, createCommentVNode as M, createElementVNode as I, createVNode as U, nextTick as H } from "vue";
 import { generateRandomString as b } from "lkt-string-tools";
-const j = (e) => e !== "" ? new Date(`${e}T00:00:00Z`) : null, z = ["data-show-ui", "data-labeled"], O = ["for", "innerHTML"], Y = { class: "lkt-field-text__main" }, Z = { name: "LktFieldDate", inheritAttrs: !1 }, q = /* @__PURE__ */ F({
+const j = (e) => e !== "" ? /* @__PURE__ */ new Date(`${e}T00:00:00Z`) : null, z = ["data-show-ui", "data-labeled"], O = ["for", "innerHTML"], Y = { class: "lkt-field-text__main" }, Z = { name: "LktFieldDate", inheritAttrs: !1 }, q = /* @__PURE__ */ L({
   ...Z,
   props: {
     modelValue: { type: Date, default: "" },
@@ -48,15 +48,15 @@ const j = (e) => e !== "" ? new Date(`${e}T00:00:00Z`) : null, z = ["data-show-u
   },
   emits: ["update:modelValue", "click-info", "click-error"],
   setup(e, { expose: V, emit: B }) {
-    const c = B, d = L(), t = e, u = (a) => a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2), s = b(16), r = n(null), y = n(u(t.modelValue)), l = n(u(t.modelValue)), D = n(!1), w = n(!t.readMode), S = i(() => typeof t.valid == "function" ? t.valid() : t.valid), P = i(() => l.value !== y.value), x = i(() => t.reset || t.infoMessage !== "" || t.errorMessage !== ""), g = i(() => {
+    const c = B, d = A(), t = e, u = (a) => a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2), r = b(16), s = n(null), y = n(u(t.modelValue)), l = n(u(t.modelValue)), D = n(!1), w = n(!t.readMode), S = i(() => typeof t.valid == "function" ? t.valid() : t.valid), P = i(() => l.value !== y.value), x = i(() => t.reset || t.infoMessage !== "" || t.errorMessage !== ""), g = i(() => {
       let a = 0;
       return t.reset && ++a, t.infoMessage && ++a, a;
     }), N = i(() => {
       const a = ["lkt-field", "lkt-field-date"];
       return t.palette && a.push(`lkt-field--${t.palette}`), P.value && a.push("is-changed"), t.disabled && a.push("is-disabled"), D.value && a.push("has-focus"), g.value > 0 && a.push("has-icons", `has-icons-${g.value}`), a.push(S.value ? "is-valid" : "is-error"), a.push(t.modelValue ? "is-filled" : "is-empty"), a.join(" ");
-    }), C = () => {
+    }), T = () => {
       H(() => {
-        r.value && r.value.focus();
+        s.value && s.value.focus();
       });
     };
     m(() => t.readMode, (a) => w.value = !a), m(() => t.modelValue, (a) => {
@@ -66,30 +66,30 @@ const j = (e) => e !== "" ? new Date(`${e}T00:00:00Z`) : null, z = ["data-show-u
     });
     const p = () => l.value = y.value;
     return V({
-      Identifier: s,
+      Identifier: r,
       reset: p,
-      focus: C,
+      focus: T,
       value: () => l.value,
       isMandatory: () => t.mandatory
     }), p(), (a, k) => {
-      const R = A("VueDatePicker");
+      const C = E("VueDatePicker");
       return v(), h("div", {
-        class: E(N.value),
+        class: F(N.value),
         "data-show-ui": x.value,
         "data-labeled": !o(d).label
       }, [
         o(d).label ? $(a.$slots, "label", { key: 0 }) : M("", !0),
         o(d).label ? M("", !0) : (v(), h("label", {
           key: 1,
-          for: o(s),
+          for: o(r),
           innerHTML: e.label
         }, null, 8, O)),
         I("div", Y, [
-          U(R, {
+          U(C, {
             modelValue: l.value,
             "onUpdate:modelValue": k[0] || (k[0] = (f) => l.value = f),
-            ref: (f) => r.value = f,
-            uid: o(s),
+            ref: (f) => s.value = f,
+            uid: o(r),
             disabled: e.disabled,
             name: e.name,
             range: e.range,
@@ -117,10 +117,9 @@ const j = (e) => e !== "" ? new Date(`${e}T00:00:00Z`) : null, z = ["data-show-u
       ], 10, z);
     };
   }
-});
-const W = {
+}), W = {
   install: (e) => {
-    e.component("lkt-field-date") === void 0 && e.component("lkt-field-date", q), e.component("VueDatePicker") === void 0 && e.component("VueDatePicker", T);
+    e.component("lkt-field-date") === void 0 && e.component("lkt-field-date", q), e.component("VueDatePicker") === void 0 && e.component("VueDatePicker", R);
   }
 };
 export {
