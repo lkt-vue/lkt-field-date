@@ -1,31 +1,32 @@
-import R from "@vuepic/vue-datepicker";
-import { defineComponent as L, useSlots as A, ref as n, computed as i, watch as m, resolveComponent as E, openBlock as v, createElementBlock as h, normalizeClass as F, unref as o, renderSlot as $, createCommentVNode as M, createElementVNode as I, createVNode as U, nextTick as H } from "vue";
-import { generateRandomString as b } from "lkt-string-tools";
-const j = (e) => e !== "" ? /* @__PURE__ */ new Date(`${e}T00:00:00Z`) : null, z = ["data-show-ui", "data-labeled"], O = ["for", "innerHTML"], Y = { class: "lkt-field-text__main" }, Z = { name: "LktFieldDate", inheritAttrs: !1 }, q = /* @__PURE__ */ L({
-  ...Z,
+import j from "@vuepic/vue-datepicker";
+import { defineComponent as I, useSlots as U, ref as o, computed as n, watch as p, resolveComponent as H, openBlock as h, createElementBlock as b, normalizeClass as O, unref as d, renderSlot as z, createCommentVNode as M, createElementVNode as A, createVNode as Y, nextTick as Z } from "vue";
+import { generateRandomString as V } from "lkt-string-tools";
+const D = (l) => l !== "" ? /* @__PURE__ */ new Date(`${l}T00:00:00Z`) : null, q = ["data-show-ui", "data-labeled"], G = ["for", "innerHTML"], J = { name: "LktFieldDate", inheritAttrs: !1 }, K = /* @__PURE__ */ I({
+  ...J,
   props: {
-    modelValue: { type: Date, default: "" },
-    placeholder: { type: String, default: "" },
-    label: { type: String, default: "" },
-    palette: { type: String, default: "" },
-    name: { type: String, default: b(16) },
+    modelValue: { default: () => /* @__PURE__ */ new Date() },
+    placeholder: { default: "" },
+    label: { default: "" },
+    palette: { default: "" },
+    name: { default: V(16) },
     valid: { type: Boolean, default: !1 },
     autocomplete: { type: Boolean, default: !0 },
     disabled: { type: Boolean, default: !1 },
     readonly: { type: Boolean, default: !1 },
     readMode: { type: Boolean, default: !1 },
     allowReadModeSwitch: { type: Boolean, default: !1 },
-    tabindex: { type: Number, default: void 0 },
+    tabindex: { default: void 0 },
     mandatory: { type: Boolean, default: !1 },
-    showPassword: { type: Boolean, default: !1 },
     reset: { type: Boolean, default: !1 },
-    resetMessage: { type: String, default: "" },
-    mandatoryMessage: { type: String, default: "" },
-    infoMessage: { type: String, default: "" },
-    errorMessage: { type: String, default: "" },
-    showPasswordMessage: { type: String, default: "" },
-    switchEditionMessage: { type: String, default: "" },
-    disabledDates: { type: Array, default: () => [] },
+    resetMessage: { default: "" },
+    mandatoryMessage: { default: "" },
+    infoMessage: { default: "" },
+    errorMessage: { default: "" },
+    switchEditionMessage: { default: "" },
+    valueSlot: { default: "" },
+    editSlot: { default: "" },
+    slotData: { default: () => ({}) },
+    disabledDates: { default: () => [] },
     utc: { type: Boolean, default: !1 },
     multiDates: { type: Boolean, default: !1 },
     inline: { type: Boolean, default: !1 },
@@ -35,61 +36,63 @@ const j = (e) => e !== "" ? /* @__PURE__ */ new Date(`${e}T00:00:00Z`) : null, z
     yearPicker: { type: Boolean, default: !1 },
     preventMinMaxNavigation: { type: Boolean, default: !1 },
     range: { type: Boolean, default: !1 },
-    autoRange: { type: [Number, String], default: () => null },
-    multiCalendars: { type: [Boolean, Number, String], default: () => null },
-    flow: { type: Array, default: () => null },
-    presetRanges: { type: Array, default: () => [] },
-    minDate: { type: Date, default: () => null },
-    maxDate: { type: Date, default: () => null },
     emptyLabel: { type: Boolean, default: !1 },
-    modelType: { type: String, default: "yyyy-MM-dd" },
-    format: { type: String, default: "yyyy-MM-dd" },
-    locale: { type: String, default: "en-US" }
+    minDate: { default: null },
+    maxDate: { default: null },
+    modelType: { default: "yyyy-MM-dd" },
+    format: { default: "yyyy-MM-dd" },
+    locale: { default: "en-US" },
+    flow: {},
+    autoRange: { default: null },
+    multiCalendars: { type: [Boolean, Number, String, null], default: null },
+    presetRanges: { default: () => [] }
   },
   emits: ["update:modelValue", "click-info", "click-error"],
-  setup(e, { expose: V, emit: B }) {
-    const c = B, d = A(), t = e, u = (a) => a.getFullYear() + "-" + ("0" + (a.getMonth() + 1)).slice(-2) + "-" + ("0" + a.getDate()).slice(-2), r = b(16), s = n(null), y = n(u(t.modelValue)), l = n(u(t.modelValue)), D = n(!1), w = n(!t.readMode), S = i(() => typeof t.valid == "function" ? t.valid() : t.valid), P = i(() => l.value !== y.value), x = i(() => t.reset || t.infoMessage !== "" || t.errorMessage !== ""), g = i(() => {
-      let a = 0;
-      return t.reset && ++a, t.infoMessage && ++a, a;
-    }), N = i(() => {
-      const a = ["lkt-field", "lkt-field-date"];
-      return t.palette && a.push(`lkt-field--${t.palette}`), P.value && a.push("is-changed"), t.disabled && a.push("is-disabled"), D.value && a.push("has-focus"), g.value > 0 && a.push("has-icons", `has-icons-${g.value}`), a.push(S.value ? "is-valid" : "is-error"), a.push(t.modelValue ? "is-filled" : "is-empty"), a.join(" ");
-    }), T = () => {
-      H(() => {
-        s.value && s.value.focus();
+  setup(l, { expose: B, emit: w }) {
+    const c = w, i = U(), a = l, u = (e) => e.getFullYear() + "-" + ("0" + (e.getMonth() + 1)).slice(-2) + "-" + ("0" + e.getDate()).slice(-2), s = V(16), r = o(null);
+    let P = u(a.modelValue), S = u(a.modelValue);
+    const y = o(P), t = o(S), v = o(a.modelValue), T = o(!1), C = o(!a.readMode), N = n(() => typeof a.valid == "function" ? a.valid() : a.valid), R = n(() => t.value !== y.value), L = n(() => a.reset || a.infoMessage !== "" || a.errorMessage !== ""), g = n(() => {
+      let e = 0;
+      return a.reset && ++e, a.infoMessage && ++e, e;
+    }), E = n(() => {
+      const e = ["lkt-field", "lkt-field-date"];
+      return a.palette && e.push(`lkt-field--${a.palette}`), R.value && e.push("is-changed"), a.disabled && e.push("is-disabled"), T.value && e.push("has-focus"), g.value > 0 && e.push("has-icons", `has-icons-${g.value}`), e.push(N.value ? "is-valid" : "is-error"), e.push(a.modelValue ? "is-filled" : "is-empty"), e.join(" ");
+    }), F = () => {
+      Z(() => {
+        r.value && r.value.focus();
       });
     };
-    m(() => t.readMode, (a) => w.value = !a), m(() => t.modelValue, (a) => {
-      l.value = u(a);
-    }, { deep: !0 }), m(l, (a) => {
-      typeof a == "string" ? c("update:modelValue", j(a)) : c("update:modelValue", a);
-    });
-    const p = () => l.value = y.value;
-    return V({
-      Identifier: r,
-      reset: p,
-      focus: T,
-      value: () => l.value,
-      isMandatory: () => t.mandatory
-    }), p(), (a, k) => {
-      const C = E("VueDatePicker");
-      return v(), h("div", {
-        class: F(N.value),
-        "data-show-ui": x.value,
-        "data-labeled": !o(d).label
+    p(() => a.readMode, (e) => C.value = !e), p(() => a.modelValue, (e) => {
+      typeof e == "object" && (t.value = u(e));
+    }, { deep: !0 }), p(t, (e) => {
+      typeof e == "string" ? (D(e) !== null && (v.value = D(e)), c("update:modelValue", v.value)) : c("update:modelValue", e);
+    }, { deep: !0 });
+    const k = () => t.value = y.value;
+    return B({
+      Identifier: s,
+      reset: k,
+      focus: F,
+      value: () => t.value,
+      isMandatory: () => a.mandatory
+    }), k(), (e, f) => {
+      const $ = H("VueDatePicker");
+      return h(), b("div", {
+        class: O(E.value),
+        "data-show-ui": L.value,
+        "data-labeled": !d(i).label
       }, [
-        o(d).label ? $(a.$slots, "label", { key: 0 }) : M("", !0),
-        o(d).label ? M("", !0) : (v(), h("label", {
+        d(i).label ? z(e.$slots, "label", { key: 0 }) : M("", !0),
+        d(i).label ? M("", !0) : (h(), b("label", {
           key: 1,
-          for: o(r),
+          for: d(s),
           innerHTML: e.label
-        }, null, 8, O)),
-        I("div", Y, [
-          U(C, {
-            modelValue: l.value,
-            "onUpdate:modelValue": k[0] || (k[0] = (f) => l.value = f),
-            ref: (f) => s.value = f,
-            uid: o(r),
+        }, null, 8, G)),
+        A("div", null, [
+          Y($, {
+            modelValue: t.value,
+            "onUpdate:modelValue": f[0] || (f[0] = (m) => t.value = m),
+            ref: (m) => r.value = m,
+            uid: d(s),
             disabled: e.disabled,
             name: e.name,
             range: e.range,
@@ -114,14 +117,14 @@ const j = (e) => e !== "" ? /* @__PURE__ */ new Date(`${e}T00:00:00Z`) : null, z
             readonly: e.readonly || e.readMode
           }, null, 8, ["modelValue", "uid", "disabled", "name", "range", "auto-range", "multi-calendars", "month-picker", "time-picker", "inline", "multi-dates", "flow", "utc", "week-picker", "year-picker", "preset-ranges", "disabled-dates", "min-date", "max-date", "prevent-min-max-navigation", "model-type", "locale", "format", "readonly"])
         ])
-      ], 10, z);
+      ], 10, q);
     };
   }
-}), W = {
-  install: (e) => {
-    e.component("lkt-field-date") === void 0 && e.component("lkt-field-date", q), e.component("VueDatePicker") === void 0 && e.component("VueDatePicker", R);
+}), x = {
+  install: (l) => {
+    l.component("lkt-field-date") === void 0 && l.component("lkt-field-date", K), l.component("VueDatePicker") === void 0 && l.component("VueDatePicker", j);
   }
 };
 export {
-  W as default
+  x as default
 };

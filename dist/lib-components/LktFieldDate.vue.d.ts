@@ -1,169 +1,91 @@
-declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
-    modelValue: {
-        type: DateConstructor;
-        default: string;
-    };
-    placeholder: {
-        type: StringConstructor;
-        default: string;
-    };
-    label: {
-        type: StringConstructor;
-        default: string;
-    };
-    palette: {
-        type: StringConstructor;
-        default: string;
-    };
-    name: {
-        type: StringConstructor;
-        default: string;
-    };
-    valid: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    autocomplete: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    readonly: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    readMode: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    allowReadModeSwitch: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    tabindex: {
-        type: NumberConstructor;
-        default: undefined;
-    };
-    mandatory: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    showPassword: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    reset: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    resetMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    mandatoryMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    infoMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    errorMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    showPasswordMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    switchEditionMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    disabledDates: {
-        type: ArrayConstructor;
-        default: () => Array<any>;
-    };
-    utc: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    multiDates: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    inline: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    monthPicker: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    timePicker: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    weekPicker: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    yearPicker: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    preventMinMaxNavigation: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    range: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    autoRange: {
-        type: (StringConstructor | NumberConstructor)[];
-        default: () => null;
-    };
-    multiCalendars: {
-        type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
-        default: () => null;
-    };
-    flow: {
-        type: ArrayConstructor;
-        default: () => null;
-    };
-    presetRanges: {
-        type: ArrayConstructor;
-        default: () => Array<any>;
-    };
-    minDate: {
-        type: DateConstructor;
-        default: () => null;
-    };
-    maxDate: {
-        type: DateConstructor;
-        default: () => null;
-    };
-    emptyLabel: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    modelType: {
-        type: StringConstructor;
-        default: string;
-    };
-    format: {
-        type: StringConstructor;
-        default: string;
-    };
-    locale: {
-        type: StringConstructor;
-        default: string;
-    };
-}, {
+import { LktObject } from "lkt-ts-interfaces";
+declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
+    modelValue?: Date | undefined;
+    placeholder?: string | undefined;
+    label?: string | undefined;
+    palette?: string | undefined;
+    name?: string | undefined;
+    valid?: boolean | undefined;
+    autocomplete?: boolean | undefined;
+    disabled?: boolean | undefined;
+    readonly?: boolean | undefined;
+    readMode?: boolean | undefined;
+    allowReadModeSwitch?: boolean | undefined;
+    tabindex?: number | undefined;
+    mandatory?: boolean | undefined;
+    reset?: boolean | undefined;
+    resetMessage?: string | undefined;
+    mandatoryMessage?: string | undefined;
+    infoMessage?: string | undefined;
+    errorMessage?: string | undefined;
+    switchEditionMessage?: string | undefined;
+    valueSlot?: string | undefined;
+    editSlot?: string | undefined;
+    slotData?: LktObject | undefined;
+    disabledDates?: string[] | undefined;
+    utc?: boolean | undefined;
+    multiDates?: boolean | undefined;
+    inline?: boolean | undefined;
+    monthPicker?: boolean | undefined;
+    timePicker?: boolean | undefined;
+    weekPicker?: boolean | undefined;
+    yearPicker?: boolean | undefined;
+    preventMinMaxNavigation?: boolean | undefined;
+    range?: boolean | undefined;
+    emptyLabel?: boolean | undefined;
+    minDate?: Date | null | undefined;
+    maxDate?: Date | null | undefined;
+    modelType?: string | undefined;
+    format?: string | undefined;
+    locale?: string | undefined;
+    flow?: string | undefined;
+    autoRange?: string | number | null | undefined;
+    multiCalendars?: string | number | boolean | null | undefined;
+    presetRanges?: any[] | undefined;
+}>, {
+    modelValue: () => Date;
+    placeholder: string;
+    label: string;
+    palette: string;
+    name: string;
+    valid: boolean;
+    autocomplete: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    readMode: boolean;
+    allowReadModeSwitch: boolean;
+    tabindex: undefined;
+    mandatory: boolean;
+    reset: boolean;
+    resetMessage: string;
+    mandatoryMessage: string;
+    infoMessage: string;
+    errorMessage: string;
+    showPasswordMessage: string;
+    switchEditionMessage: string;
+    valueSlot: string;
+    editSlot: string;
+    slotData: () => {};
+    disabledDates: () => never[];
+    utc: boolean;
+    multiDates: boolean;
+    inline: boolean;
+    monthPicker: boolean;
+    timePicker: boolean;
+    weekPicker: boolean;
+    yearPicker: boolean;
+    preventMinMaxNavigation: boolean;
+    range: boolean;
+    emptyLabel: boolean;
+    minDate: null;
+    maxDate: null;
+    modelType: string;
+    format: string;
+    locale: string;
+    autoRange: null;
+    multiCalendars: null;
+    presetRanges: () => never[];
+}>, {
     Identifier: string;
     reset: () => string;
     focus: () => void;
@@ -173,172 +95,93 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     "update:modelValue": (...args: any[]) => void;
     "click-info": (...args: any[]) => void;
     "click-error": (...args: any[]) => void;
-}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
-    modelValue: {
-        type: DateConstructor;
-        default: string;
-    };
-    placeholder: {
-        type: StringConstructor;
-        default: string;
-    };
-    label: {
-        type: StringConstructor;
-        default: string;
-    };
-    palette: {
-        type: StringConstructor;
-        default: string;
-    };
-    name: {
-        type: StringConstructor;
-        default: string;
-    };
-    valid: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    autocomplete: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    readonly: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    readMode: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    allowReadModeSwitch: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    tabindex: {
-        type: NumberConstructor;
-        default: undefined;
-    };
-    mandatory: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    showPassword: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    reset: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    resetMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    mandatoryMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    infoMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    errorMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    showPasswordMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    switchEditionMessage: {
-        type: StringConstructor;
-        default: string;
-    };
-    disabledDates: {
-        type: ArrayConstructor;
-        default: () => Array<any>;
-    };
-    utc: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    multiDates: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    inline: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    monthPicker: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    timePicker: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    weekPicker: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    yearPicker: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    preventMinMaxNavigation: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    range: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    autoRange: {
-        type: (StringConstructor | NumberConstructor)[];
-        default: () => null;
-    };
-    multiCalendars: {
-        type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
-        default: () => null;
-    };
-    flow: {
-        type: ArrayConstructor;
-        default: () => null;
-    };
-    presetRanges: {
-        type: ArrayConstructor;
-        default: () => Array<any>;
-    };
-    minDate: {
-        type: DateConstructor;
-        default: () => null;
-    };
-    maxDate: {
-        type: DateConstructor;
-        default: () => null;
-    };
-    emptyLabel: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    modelType: {
-        type: StringConstructor;
-        default: string;
-    };
-    format: {
-        type: StringConstructor;
-        default: string;
-    };
-    locale: {
-        type: StringConstructor;
-        default: string;
-    };
-}>> & {
+}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
+    modelValue?: Date | undefined;
+    placeholder?: string | undefined;
+    label?: string | undefined;
+    palette?: string | undefined;
+    name?: string | undefined;
+    valid?: boolean | undefined;
+    autocomplete?: boolean | undefined;
+    disabled?: boolean | undefined;
+    readonly?: boolean | undefined;
+    readMode?: boolean | undefined;
+    allowReadModeSwitch?: boolean | undefined;
+    tabindex?: number | undefined;
+    mandatory?: boolean | undefined;
+    reset?: boolean | undefined;
+    resetMessage?: string | undefined;
+    mandatoryMessage?: string | undefined;
+    infoMessage?: string | undefined;
+    errorMessage?: string | undefined;
+    switchEditionMessage?: string | undefined;
+    valueSlot?: string | undefined;
+    editSlot?: string | undefined;
+    slotData?: LktObject | undefined;
+    disabledDates?: string[] | undefined;
+    utc?: boolean | undefined;
+    multiDates?: boolean | undefined;
+    inline?: boolean | undefined;
+    monthPicker?: boolean | undefined;
+    timePicker?: boolean | undefined;
+    weekPicker?: boolean | undefined;
+    yearPicker?: boolean | undefined;
+    preventMinMaxNavigation?: boolean | undefined;
+    range?: boolean | undefined;
+    emptyLabel?: boolean | undefined;
+    minDate?: Date | null | undefined;
+    maxDate?: Date | null | undefined;
+    modelType?: string | undefined;
+    format?: string | undefined;
+    locale?: string | undefined;
+    flow?: string | undefined;
+    autoRange?: string | number | null | undefined;
+    multiCalendars?: string | number | boolean | null | undefined;
+    presetRanges?: any[] | undefined;
+}>, {
+    modelValue: () => Date;
+    placeholder: string;
+    label: string;
+    palette: string;
+    name: string;
+    valid: boolean;
+    autocomplete: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    readMode: boolean;
+    allowReadModeSwitch: boolean;
+    tabindex: undefined;
+    mandatory: boolean;
+    reset: boolean;
+    resetMessage: string;
+    mandatoryMessage: string;
+    infoMessage: string;
+    errorMessage: string;
+    showPasswordMessage: string;
+    switchEditionMessage: string;
+    valueSlot: string;
+    editSlot: string;
+    slotData: () => {};
+    disabledDates: () => never[];
+    utc: boolean;
+    multiDates: boolean;
+    inline: boolean;
+    monthPicker: boolean;
+    timePicker: boolean;
+    weekPicker: boolean;
+    yearPicker: boolean;
+    preventMinMaxNavigation: boolean;
+    range: boolean;
+    emptyLabel: boolean;
+    minDate: null;
+    maxDate: null;
+    modelType: string;
+    format: string;
+    locale: string;
+    autoRange: null;
+    multiCalendars: null;
+    presetRanges: () => never[];
+}>>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     "onClick-info"?: ((...args: any[]) => any) | undefined;
     "onClick-error"?: ((...args: any[]) => any) | undefined;
@@ -351,7 +194,6 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     disabled: boolean;
     readonly: boolean;
     range: boolean;
-    flow: unknown[];
     mandatory: boolean;
     placeholder: string;
     tabindex: number;
@@ -361,14 +203,15 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     valid: boolean;
     readMode: boolean;
     allowReadModeSwitch: boolean;
-    showPassword: boolean;
     resetMessage: string;
     mandatoryMessage: string;
     infoMessage: string;
     errorMessage: string;
-    showPasswordMessage: string;
     switchEditionMessage: string;
-    disabledDates: unknown[];
+    valueSlot: string;
+    editSlot: string;
+    slotData: LktObject;
+    disabledDates: string[];
     utc: boolean;
     multiDates: boolean;
     monthPicker: boolean;
@@ -376,18 +219,35 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     weekPicker: boolean;
     yearPicker: boolean;
     preventMinMaxNavigation: boolean;
-    autoRange: string | number;
-    multiCalendars: string | number | boolean;
-    presetRanges: unknown[];
-    minDate: Date;
-    maxDate: Date;
     emptyLabel: boolean;
+    minDate: Date | null;
+    maxDate: Date | null;
     modelType: string;
     locale: string;
+    autoRange: string | number | null;
+    multiCalendars: boolean | number | string | null;
+    presetRanges: any[];
 }, {}>, {
     label?(_: {}): any;
 }>;
 export default _default;
+type __VLS_NonUndefinedable<T> = T extends undefined ? never : T;
+type __VLS_TypePropsToRuntimeProps<T> = {
+    [K in keyof T]-?: {} extends Pick<T, K> ? {
+        type: import('vue').PropType<__VLS_NonUndefinedable<T[K]>>;
+    } : {
+        type: import('vue').PropType<T[K]>;
+        required: true;
+    };
+};
+type __VLS_WithDefaults<P, D> = {
+    [K in keyof Pick<P, keyof P>]: K extends keyof D ? __VLS_Prettify<P[K] & {
+        default: D[K];
+    }> : P[K];
+};
+type __VLS_Prettify<T> = {
+    [K in keyof T]: T[K];
+} & {};
 type __VLS_WithTemplateSlots<T, S> = T & {
     new (): {
         $slots: S;

@@ -7,6 +7,7 @@ export default {name: "LktFieldDate", inheritAttrs: false}
 import {generateRandomString} from "lkt-string-tools";
 import {computed, nextTick, ref, useSlots, watch} from "vue";
 import {ymdToDate} from "lkt-date-tools";
+import {LktObject} from "lkt-ts-interfaces";
 
 const emits = defineEmits(['update:modelValue', 'click-info', 'click-error']);
 
@@ -14,51 +15,92 @@ const emits = defineEmits(['update:modelValue', 'click-info', 'click-error']);
 const slots = useSlots();
 
 // Props
-const props = defineProps({
-    modelValue: {type: Date, default: ''},
-
-    placeholder: {type: String, default: ''},
-    label: {type: String, default: ''},
-    palette: {type: String, default: ''},
-    name: {type: String, default: generateRandomString(16)},
-    valid: {type: Boolean, default: false},
-    autocomplete: {type: Boolean, default: true},
-    disabled: {type: Boolean, default: false},
-    readonly: {type: Boolean, default: false},
-    readMode: {type: Boolean, default: false},
-    allowReadModeSwitch: {type: Boolean, default: false},
-    tabindex: {type: Number, default: undefined},
-    mandatory: {type: Boolean, default: false},
-    showPassword: {type: Boolean, default: false},
-    reset: {type: Boolean, default: false},
-    resetMessage: {type: String, default: ''},
-    mandatoryMessage: {type: String, default: ''},
-    infoMessage: {type: String, default: ''},
-    errorMessage: {type: String, default: ''},
-    showPasswordMessage: {type: String, default: ''},
-    switchEditionMessage: {type: String, default: ''},
-
-
-    disabledDates: {type: Array, default: (): Array<any> => []},
-    utc: {type: Boolean, default: false},
-    multiDates: {type: Boolean, default: false},
-    inline: {type: Boolean, default: false},
-    monthPicker: {type: Boolean, default: false},
-    timePicker: {type: Boolean, default: false},
-    weekPicker: {type: Boolean, default: false},
-    yearPicker: {type: Boolean, default: false},
-    preventMinMaxNavigation: {type: Boolean, default: false},
-    range: {type: Boolean, default: false},
-    autoRange: {type: [Number, String], default: (): null => null},
-    multiCalendars: {type: [Boolean, Number, String], default: (): null => null},
-    flow: {type: Array, default: (): null => null},
-    presetRanges: {type: Array, default: (): Array<any> => []},
-    minDate: {type: Date, default: (): null => null},
-    maxDate: {type: Date, default: (): null => null},
-    emptyLabel: {type: Boolean, default: false},
-    modelType: {type: String, default: 'yyyy-MM-dd'},
-    format: {type: String, default: 'yyyy-MM-dd'},
-    locale: {type: String, default: 'en-US'},
+const props = withDefaults(defineProps<{
+    modelValue?: Date
+    placeholder?: string
+    label?: string
+    palette?: string
+    name?: string
+    valid?: boolean
+    autocomplete?: boolean
+    disabled?: boolean
+    readonly?: boolean
+    readMode?: boolean
+    allowReadModeSwitch?: boolean
+    tabindex?: number
+    mandatory?: boolean
+    reset?: boolean
+    resetMessage?: string
+    mandatoryMessage?: string
+    infoMessage?: string
+    errorMessage?: string
+    switchEditionMessage?: string
+    valueSlot?: string
+    editSlot?: string
+    slotData?: LktObject
+    disabledDates?: string[]
+    utc?: boolean
+    multiDates?: boolean
+    inline?: boolean
+    monthPicker?: boolean
+    timePicker?: boolean
+    weekPicker?: boolean
+    yearPicker?: boolean
+    preventMinMaxNavigation?: boolean
+    range?: boolean
+    emptyLabel?: boolean
+    minDate?: Date|null
+    maxDate?: Date|null
+    modelType?: string
+    format?: string
+    locale?: string
+    flow?: string
+    autoRange?: string|number|null
+    multiCalendars?: boolean|number|string|null
+    presetRanges?: any[]
+}>(), {
+    modelValue: () => new Date(),
+    placeholder: '',
+    label: '',
+    palette: '',
+    name: generateRandomString(16),
+    valid: false,
+    autocomplete: true,
+    disabled: false,
+    readonly: false,
+    readMode: false,
+    allowReadModeSwitch: false,
+    tabindex: undefined,
+    mandatory: false,
+    reset: false,
+    resetMessage: '',
+    mandatoryMessage: '',
+    infoMessage: '',
+    errorMessage: '',
+    showPasswordMessage: '',
+    switchEditionMessage: '',
+    valueSlot: '',
+    editSlot: '',
+    slotData: () => ({}),
+    disabledDates: () => [],
+    utc: false,
+    multiDates: false,
+    inline: false,
+    monthPicker: false,
+    timePicker: false,
+    weekPicker: false,
+    yearPicker: false,
+    preventMinMaxNavigation: false,
+    range: false,
+    emptyLabel: false,
+    minDate: null,
+    maxDate: null,
+    modelType: 'yyyy-MM-dd',
+    format: 'yyyy-MM-dd',
+    locale: 'en-US',
+    autoRange: null,
+    multiCalendars: null,
+    presetRanges: () => [],
 });
 
 const getFormattedDate = (d: Date) => {
@@ -73,8 +115,12 @@ const Identifier = generateRandomString(16);
 const inputElement = ref(null);
 
 // Reactive data
-const originalValue = ref(getFormattedDate(props.modelValue)),
-    value = ref(getFormattedDate(props.modelValue)),
+let _originalValue = getFormattedDate(props.modelValue),
+    _value = getFormattedDate(props.modelValue);
+
+const originalValue = ref(_originalValue),
+    value = ref(_value),
+    valueObj = ref(props.modelValue),
     focusing = ref(false),
     editable = ref(!props.readMode);
 
@@ -123,15 +169,22 @@ const focus = () => {
 // Watch data
 watch(() => props.readMode, (v) => editable.value = !v)
 watch(() => props.modelValue, (v) => {
-    value.value = getFormattedDate(v)
-}, {deep: true})
+    if (typeof v === 'object') {
+        value.value = getFormattedDate(v)
+    }
+}, {deep: true});
 watch(value, (v) => {
     if (typeof v === 'string') {
-        emits('update:modelValue', ymdToDate(v))
+        let asDate = ymdToDate(v);
+        if (asDate !== null) {
+            //@ts-ignore
+            valueObj.value = ymdToDate(v);
+        }
+        emits('update:modelValue', valueObj.value)
     } else {
         emits('update:modelValue', v)
     }
-})
+}, {deep: true});
 
 const reset = () => value.value = originalValue.value,
     getValue = () => value.value;
@@ -155,7 +208,7 @@ reset();
         <slot v-if="!!slots.label" name="label"></slot>
         <label v-if="!!!slots.label" :for="Identifier" v-html="label"></label>
 
-        <div class="lkt-field-text__main">
+        <div>
             <VueDatePicker v-model="value"
                            :ref="(el:any) => inputElement = el"
                            v-bind:uid="Identifier"
