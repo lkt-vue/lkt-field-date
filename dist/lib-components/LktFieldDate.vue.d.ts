@@ -1,6 +1,6 @@
 import { LktObject } from "lkt-ts-interfaces";
 declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    modelValue?: Date | undefined;
+    modelValue?: string | Date | undefined;
     placeholder?: string | undefined;
     label?: string | undefined;
     palette?: string | undefined;
@@ -87,16 +87,16 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     presetRanges: () => never[];
 }>, {
     Identifier: string;
-    reset: () => string;
+    reset: () => any;
     focus: () => void;
-    value: () => string;
+    value: () => any;
     isMandatory: () => boolean;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
     "update:modelValue": (...args: any[]) => void;
     "click-info": (...args: any[]) => void;
     "click-error": (...args: any[]) => void;
 }, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    modelValue?: Date | undefined;
+    modelValue?: string | Date | undefined;
     placeholder?: string | undefined;
     label?: string | undefined;
     palette?: string | undefined;
@@ -198,7 +198,7 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<__
     placeholder: string;
     tabindex: number;
     format: string;
-    modelValue: Date;
+    modelValue: Date | string;
     palette: string;
     valid: boolean;
     readMode: boolean;

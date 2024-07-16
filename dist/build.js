@@ -1,14 +1,18 @@
-import j from "@vuepic/vue-datepicker";
-import { defineComponent as I, useSlots as U, ref as o, computed as n, watch as p, resolveComponent as H, openBlock as h, createElementBlock as b, normalizeClass as O, unref as d, renderSlot as z, createCommentVNode as M, createElementVNode as A, createVNode as Y, nextTick as Z } from "vue";
-import { generateRandomString as V } from "lkt-string-tools";
-const D = (l) => l !== "" ? /* @__PURE__ */ new Date(`${l}T00:00:00Z`) : null, q = ["data-show-ui", "data-labeled"], G = ["for", "innerHTML"], J = { name: "LktFieldDate", inheritAttrs: !1 }, K = /* @__PURE__ */ I({
-  ...J,
+import I from "@vuepic/vue-datepicker";
+import { defineComponent as U, useSlots as H, ref as n, computed as i, watch as c, resolveComponent as z, openBlock as h, createElementBlock as M, normalizeClass as A, unref as u, renderSlot as Y, createCommentVNode as V, createElementVNode as Z, createVNode as q, nextTick as G } from "vue";
+import { generateRandomString as B } from "lkt-string-tools";
+function J(l) {
+  const t = l.split(/\D/);
+  return new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
+}
+const w = (l) => l !== "" ? /* @__PURE__ */ new Date(`${l}T00:00:00Z`) : null, K = ["data-show-ui", "data-labeled"], Q = ["for", "innerHTML"], W = { name: "LktFieldDate", inheritAttrs: !1 }, X = /* @__PURE__ */ U({
+  ...W,
   props: {
     modelValue: { default: () => /* @__PURE__ */ new Date() },
     placeholder: { default: "" },
     label: { default: "" },
     palette: { default: "" },
-    name: { default: V(16) },
+    name: { default: B(16) },
     valid: { type: Boolean, default: !1 },
     autocomplete: { type: Boolean, default: !0 },
     disabled: { type: Boolean, default: !1 },
@@ -48,51 +52,51 @@ const D = (l) => l !== "" ? /* @__PURE__ */ new Date(`${l}T00:00:00Z`) : null, q
     presetRanges: { default: () => [] }
   },
   emits: ["update:modelValue", "click-info", "click-error"],
-  setup(l, { expose: B, emit: w }) {
-    const c = w, i = U(), a = l, u = (e) => e.getFullYear() + "-" + ("0" + (e.getMonth() + 1)).slice(-2) + "-" + ("0" + e.getDate()).slice(-2), s = V(16), r = o(null);
-    let P = u(a.modelValue), S = u(a.modelValue);
-    const y = o(P), t = o(S), v = o(a.modelValue), T = o(!1), C = o(!a.readMode), N = n(() => typeof a.valid == "function" ? a.valid() : a.valid), R = n(() => t.value !== y.value), L = n(() => a.reset || a.infoMessage !== "" || a.errorMessage !== ""), g = n(() => {
+  setup(l, { expose: t, emit: P }) {
+    const y = P, s = H(), a = l, d = (e) => typeof e == "string" ? d(g(e)) : e.getFullYear() + "-" + ("0" + (e.getMonth() + 1)).slice(-2) + "-" + ("0" + e.getDate()).slice(-2), g = (e) => typeof e == "string" ? J(e) : typeof e == "object" ? e : null, r = B(16), f = n(null);
+    let S = d(a.modelValue), T = d(a.modelValue), j = g(a.modelValue);
+    const v = n(S), o = n(T), k = n(j), C = n(!1), N = n(!a.readMode), R = i(() => typeof a.valid == "function" ? a.valid() : a.valid), L = i(() => o.value !== v.value), E = i(() => a.reset || a.infoMessage !== "" || a.errorMessage !== ""), b = i(() => {
       let e = 0;
       return a.reset && ++e, a.infoMessage && ++e, e;
-    }), E = n(() => {
+    }), F = i(() => {
       const e = ["lkt-field", "lkt-field-date"];
-      return a.palette && e.push(`lkt-field--${a.palette}`), R.value && e.push("is-changed"), a.disabled && e.push("is-disabled"), T.value && e.push("has-focus"), g.value > 0 && e.push("has-icons", `has-icons-${g.value}`), e.push(N.value ? "is-valid" : "is-error"), e.push(a.modelValue ? "is-filled" : "is-empty"), e.join(" ");
-    }), F = () => {
-      Z(() => {
-        r.value && r.value.focus();
+      return a.palette && e.push(`lkt-field--${a.palette}`), L.value && e.push("is-changed"), a.disabled && e.push("is-disabled"), C.value && e.push("has-focus"), b.value > 0 && e.push("has-icons", `has-icons-${b.value}`), e.push(R.value ? "is-valid" : "is-error"), e.push(a.modelValue ? "is-filled" : "is-empty"), e.join(" ");
+    }), O = () => {
+      G(() => {
+        f.value && f.value.focus();
       });
     };
-    p(() => a.readMode, (e) => C.value = !e), p(() => a.modelValue, (e) => {
-      typeof e == "object" && (t.value = u(e));
-    }, { deep: !0 }), p(t, (e) => {
-      typeof e == "string" ? (D(e) !== null && (v.value = D(e)), c("update:modelValue", v.value)) : c("update:modelValue", e);
+    c(() => a.readMode, (e) => N.value = !e), c(() => a.modelValue, (e) => {
+      typeof e == "object" && (o.value = d(e));
+    }, { deep: !0 }), c(o, (e) => {
+      typeof e == "string" ? (w(e) !== null && (k.value = w(e)), y("update:modelValue", k.value)) : y("update:modelValue", e);
     }, { deep: !0 });
-    const k = () => t.value = y.value;
-    return B({
-      Identifier: s,
-      reset: k,
-      focus: F,
-      value: () => t.value,
+    const D = () => o.value = v.value;
+    return t({
+      Identifier: r,
+      reset: D,
+      focus: O,
+      value: () => o.value,
       isMandatory: () => a.mandatory
-    }), k(), (e, f) => {
-      const $ = H("VueDatePicker");
-      return h(), b("div", {
-        class: O(E.value),
-        "data-show-ui": L.value,
-        "data-labeled": !d(i).label
+    }), D(), (e, m) => {
+      const $ = z("VueDatePicker");
+      return h(), M("div", {
+        class: A(F.value),
+        "data-show-ui": E.value,
+        "data-labeled": !u(s).label
       }, [
-        d(i).label ? z(e.$slots, "label", { key: 0 }) : M("", !0),
-        d(i).label ? M("", !0) : (h(), b("label", {
+        u(s).label ? Y(e.$slots, "label", { key: 0 }) : V("", !0),
+        u(s).label ? V("", !0) : (h(), M("label", {
           key: 1,
-          for: d(s),
+          for: u(r),
           innerHTML: e.label
-        }, null, 8, G)),
-        A("div", null, [
-          Y($, {
-            modelValue: t.value,
-            "onUpdate:modelValue": f[0] || (f[0] = (m) => t.value = m),
-            ref: (m) => r.value = m,
-            uid: d(s),
+        }, null, 8, Q)),
+        Z("div", null, [
+          q($, {
+            modelValue: o.value,
+            "onUpdate:modelValue": m[0] || (m[0] = (p) => o.value = p),
+            ref: (p) => f.value = p,
+            uid: u(r),
             disabled: e.disabled,
             name: e.name,
             range: e.range,
@@ -117,14 +121,14 @@ const D = (l) => l !== "" ? /* @__PURE__ */ new Date(`${l}T00:00:00Z`) : null, q
             readonly: e.readonly || e.readMode
           }, null, 8, ["modelValue", "uid", "disabled", "name", "range", "auto-range", "multi-calendars", "month-picker", "time-picker", "inline", "multi-dates", "flow", "utc", "week-picker", "year-picker", "preset-ranges", "disabled-dates", "min-date", "max-date", "prevent-min-max-navigation", "model-type", "locale", "format", "readonly"])
         ])
-      ], 10, q);
+      ], 10, K);
     };
   }
-}), x = {
+}), le = {
   install: (l) => {
-    l.component("lkt-field-date") === void 0 && l.component("lkt-field-date", K), l.component("VueDatePicker") === void 0 && l.component("VueDatePicker", j);
+    l.component("lkt-field-date") === void 0 && l.component("lkt-field-date", X), l.component("VueDatePicker") === void 0 && l.component("VueDatePicker", I);
   }
 };
 export {
-  x as default
+  le as default
 };

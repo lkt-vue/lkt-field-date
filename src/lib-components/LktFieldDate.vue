@@ -6,7 +6,7 @@ export default {name: "LktFieldDate", inheritAttrs: false}
 // Emits
 import {generateRandomString} from "lkt-string-tools";
 import {computed, nextTick, ref, useSlots, watch} from "vue";
-import {ymdToDate} from "lkt-date-tools";
+import {isoToDate, ymdToDate} from "lkt-date-tools";
 import {LktObject} from "lkt-ts-interfaces";
 
 const emits = defineEmits(['update:modelValue', 'click-info', 'click-error']);
@@ -16,7 +16,7 @@ const slots = useSlots();
 
 // Props
 const props = withDefaults(defineProps<{
-    modelValue?: Date
+    modelValue?: Date | string
     placeholder?: string
     label?: string
     palette?: string
@@ -49,14 +49,14 @@ const props = withDefaults(defineProps<{
     preventMinMaxNavigation?: boolean
     range?: boolean
     emptyLabel?: boolean
-    minDate?: Date|null
-    maxDate?: Date|null
+    minDate?: Date | null
+    maxDate?: Date | null
     modelType?: string
     format?: string
     locale?: string
     flow?: string
-    autoRange?: string|number|null
-    multiCalendars?: boolean|number|string|null
+    autoRange?: string | number | null
+    multiCalendars?: boolean | number | string | null
     presetRanges?: any[]
 }>(), {
     modelValue: () => new Date(),
@@ -103,9 +103,17 @@ const props = withDefaults(defineProps<{
     presetRanges: () => [],
 });
 
-const getFormattedDate = (d: Date) => {
-    return d.getFullYear() + '-' + ('0'+(d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
-}
+const getFormattedDate = (d: Date | string) => {
+        if (typeof d === 'string') return getFormattedDate(getObjectDate(d));
+        return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+    },
+    getObjectDate = (d: Date | string) => {
+        if (typeof d === 'string') {
+            return isoToDate(d);
+        }
+        if (typeof d === 'object') return d;
+        return null;
+    };
 
 // Constant data
 const Identifier = generateRandomString(16);
@@ -116,11 +124,12 @@ const inputElement = ref(null);
 
 // Reactive data
 let _originalValue = getFormattedDate(props.modelValue),
-    _value = getFormattedDate(props.modelValue);
+    _value = getFormattedDate(props.modelValue),
+    _valueObj = getObjectDate(props.modelValue);
 
 const originalValue = ref(_originalValue),
     value = ref(_value),
-    valueObj = ref(props.modelValue),
+    valueObj = ref(_valueObj),
     focusing = ref(false),
     editable = ref(!props.readMode);
 
