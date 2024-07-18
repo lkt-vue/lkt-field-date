@@ -8,6 +8,7 @@ import {generateRandomString} from "lkt-string-tools";
 import {computed, nextTick, ref, useSlots, watch} from "vue";
 import {isoToDate, ymdToDate} from "lkt-date-tools";
 import {LktObject} from "lkt-ts-interfaces";
+import {__} from "lkt-i18n";
 
 const emits = defineEmits(['update:modelValue', 'click-info', 'click-error']);
 
@@ -163,6 +164,12 @@ const isValid = computed(() => {
         r.push(!!props.modelValue ? 'is-filled' : 'is-empty');
 
         return r.join(' ');
+    }),
+    computedLabel = computed(() => {
+        if (props.label.startsWith('__:')) {
+            return __(props.label.substring(3));
+        }
+        return props.label;
     });
 
 const focus = () => {
@@ -215,7 +222,7 @@ reset();
          v-bind:data-labeled="!!!slots.label"
     >
         <slot v-if="!!slots.label" name="label"></slot>
-        <label v-if="!!!slots.label" :for="Identifier" v-html="label"></label>
+        <label v-if="!!!slots.label" :for="Identifier" v-html="computedLabel"></label>
 
         <div>
             <VueDatePicker v-model="value"

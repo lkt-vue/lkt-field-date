@@ -20,7 +20,18 @@ export default {
         outDir,
         minify: true,
         rollupOptions: {
-            external: [ 'vue', 'lkt-tools', 'lkt-events', 'lkt-button', 'lkt-http-client', 'lkt-string-tools', 'axios', 'lkt-data-state', '@vuepic/vue-datepicker' ],
+            external: [
+                'vue',
+                'lkt-tools',
+                'lkt-events',
+                'lkt-button',
+                'lkt-http-client',
+                'lkt-string-tools',
+                'lkt-i18n',
+                'axios',
+                'lkt-data-state',
+                '@vuepic/vue-datepicker'
+            ],
             output: {
                 globals: {
                     vue: 'Vue',

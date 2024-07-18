@@ -1,4 +1,4 @@
-export { le as default };
-declare namespace le {
+export { ne as default };
+declare namespace ne {
     function install(l: any): void;
 }
